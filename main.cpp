@@ -12,7 +12,7 @@ int main(int argc, char* args[]) {
     wcisk.button = SDL_BUTTON_LEFT;
     wcisk.type = SDL_MOUSEBUTTONDOWN;
     wcisk.state = SDL_PRESSED;
-    while (SDL_MOUSEBUTTONDOWN) {
+    while (n!=0) {
         SDL_RenderClear(renderer);
 
 
@@ -37,8 +37,17 @@ int main(int argc, char* args[]) {
             //SDL_RenderSetClipRect(renderer, &kwadrat[i]);
 
         }
-        SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-        SDL_RenderPresent(renderer);
+        if(SDL_MOUSEBUTTONDOWN)
+        {
+            SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+            SDL_RenderPresent(renderer);
+        }
+        else
+        {
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+            SDL_RenderPresent(renderer);
+        }
+
     }
 
 
