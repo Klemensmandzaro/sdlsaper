@@ -30,7 +30,7 @@ void EventManager::update(){
                 SDL_GetMouseState(&x, &y);
 
                 SDL_SetRenderDrawColor(renderer, x, x, x, 255);
-                //SDL_RenderPresent(renderer);
+
                 mousePress(e.button);
                 break;
 
@@ -45,32 +45,33 @@ int main(int argc, char* args[]) {
     wcisk.button = SDL_BUTTON_LEFT;
     wcisk.type = SDL_MOUSEBUTTONDOWN;
     wcisk.state = SDL_PRESSED;
+    for (int i = 0; i < 144; i++) {
+        if ((i - 1) < 0) {
+            kwadrat[i].x = 0;
+            kwadrat[i].y = 0;
+        } else if (kwadrat[i - 1].x == 550) {
+            kwadrat[i].y = kwadrat[i - 1].y + 50;
+            kwadrat[i].x = 0;
+        } else {
+            kwadrat[i].x = kwadrat[i - 1].x + 50;
+            kwadrat[i].y = kwadrat[i - 1].y;
+        }
+
+        kwadrat[i].h = 50;
+        kwadrat[i].w = 50;
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+        SDL_RenderDrawRect(renderer, &kwadrat[i]);
+        SDL_RenderPresent(renderer);
+        //SDL_RenderSetClipRect(renderer, &kwadrat[i]);
+
+    }
     while (n!=0) {
         SDL_RenderClear(renderer);
 
 
 
 
-        for (int i = 0; i < 144; i++) {
-            if ((i - 1) < 0) {
-                kwadrat[i].x = 0;
-                kwadrat[i].y = 0;
-            } else if (kwadrat[i - 1].x == 550) {
-                kwadrat[i].y = kwadrat[i - 1].y + 50;
-                kwadrat[i].x = 0;
-            } else {
-                kwadrat[i].x = kwadrat[i - 1].x + 50;
-                kwadrat[i].y = kwadrat[i - 1].y;
-            }
-
-            kwadrat[i].h = 50;
-            kwadrat[i].w = 50;
-            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-            SDL_RenderDrawRect(renderer, &kwadrat[i]);
-            SDL_RenderPresent(renderer);
-            //SDL_RenderSetClipRect(renderer, &kwadrat[i]);
-
-        }
+        SDL_RenderPresent(renderer);
 
         EventManager event;
         event.update();
