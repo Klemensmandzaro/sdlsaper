@@ -3,6 +3,7 @@
 const int width=600;
 const int height=600;
 int n=1;
+int x, y;
 SDL_Window *window = SDL_CreateWindow("saper", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
 SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 class EventManager{
@@ -26,8 +27,10 @@ void EventManager::update(){
             case SDL_MOUSEBUTTONDOWN:
                 //do whatever you want to do after a mouse button was pressed,
                 // e.g.:
-                SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-                SDL_RenderPresent(renderer);
+                SDL_GetMouseState(&x, &y);
+
+                SDL_SetRenderDrawColor(renderer, x, x, x, 255);
+                //SDL_RenderPresent(renderer);
                 mousePress(e.button);
                 break;
 
